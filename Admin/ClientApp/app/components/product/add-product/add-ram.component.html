@@ -1,0 +1,76 @@
+﻿<form *ngIf="product" name="form1" style="margin-top:20px">
+	<div style="width:600px">
+		<div class="card_characteristic pull-left">
+			<h3>General information</h3>
+			<div style="margin-left:10px;margin-top:25px">
+				<div class="group">
+					<input type="text" class="input_text" name="Name" [(ngModel)]="product.characteristic['Name']" required />
+					<label class="label"> Name </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="MemoryType" [(ngModel)]="product.characteristic['MemoryType']" required />
+					<label class="label"> Memory Type </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Capacity" [(ngModel)]="product.characteristic['Capacity']" required />
+					<label class="label"> Capacity </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="SupplyVoltage" [(ngModel)]="product.characteristic['SupplyVoltage']" required />
+					<label class="label"> Supply Voltage </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Frequency" [(ngModel)]="product.characteristic['Frequency']" required />
+					<label class="label"> Frequency </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="RadiatorsOnTheSlats" [(ngModel)]="product.characteristic['RadiatorsOnTheSlats']" required />
+					<label class="label"> Radiators On The Slats </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Throughput" [(ngModel)]="product.characteristic['Throughput']" required />
+					<label class="label"> Throughput </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="TimingsScheme" [(ngModel)]="product.characteristic['TimingsScheme']" required />
+					<label class="label"> Timings Scheme </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="NumberOfSlats" [(ngModel)]="product.characteristic['NumberOfSlats']" required />
+					<label class="label"> Number of slats </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Appointment" [(ngModel)]="product.characteristic['Appointment']" required />
+					<label class="label"> Appointment </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Buffering" [(ngModel)]="product.characteristic['Buffering']" required />
+					<label class="label"> Buffering </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="ECC" [(ngModel)]="product.characteristic['ECC']" required />
+					<label class="label"> ECC </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Guarantee" [(ngModel)]="product.characteristic['Guarantee']" required />
+					<label class="label"> Guarantee </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Price" [(ngModel)]="product.characteristic['Price']" required />
+					<label class="label"> Price </label>
+				</div>
+				<div class="group">
+					<input type="text" class="input_text" name="Quantity" [(ngModel)]="product.characteristic['Quantity']" required />
+					<label class="label"> Quantity </label>
+				</div>
+			</div>
+		</div>
+		<div class="pull-right margin_top_15"><input class="btn button_style btn-default" type="button" value="Ok" (click)="addProduct()" /></div>
+	</div>
+
+	<div *ngIf="success" class="col-md-3 card_image pull-right">
+		<div><input class="btn button_style btn-default" type="button" value="Upload Image" onclick="document.getElementById('imageUpload').click()" /></div>
+		<input type="file" ng2FileSelect [uploader]="uploader" style="display:none" id="imageUpload" (change)="updImage()" />
+		<div *ngIf="successUpload" class="pull-left"><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%" /></div>
+	</div>
+</form>

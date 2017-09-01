@@ -1,0 +1,96 @@
+﻿<div style="box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.12); background-color:white ;padding: 12px;">
+	<div *ngIf="shoppingCart == null || shoppingCart.products.length == 0" class="center-block">
+		<h2 class="alert-danger col-md-6 text-center empty_stl"> Shopping Cart is empty. </h2>
+	</div>
+	<div class="clearfix"></div>
+
+	<div *ngIf="shoppingCart != null && shoppingCart.products.length > 0">
+		<div class="col-md-12">
+			<div class="col-md-6"><h2 class="pull-left">{{shoppingCart?.userName}}'s ShoppingCart</h2></div>
+			<div class="col-md-6"><h2 class="pull-right">${{shoppingCart?.totalPrice}} USD</h2></div>
+		</div>
+		<div class="clearfix"></div>
+
+
+		<div class="col-md-12" *ngFor="let product of shoppingCart?.products | paginate: { itemsPerPage: 4, currentPage: p }; let i = index" style="margin-top:15px;">
+			<hr style="width:100%" />
+			<div class="center-block col-md-12">
+				<div class="col-md-3"><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%" /></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-7">
+					<div><span><b>Name:</b>  {{product?.characteristic?.Name}} </span></div>
+					<div><span> <b>Discription:</b>  {{product?.characteristic?.Discription}} </span></div>
+					<div class="pull-right margin_top_50"> <h3>${{product?.characteristic?.Price}} USD</h3></div>
+				</div>
+				<div class="col-md-1">
+					<img src="/images/remove_icon_1.png" class="pull-left cursor" style="width:30%"
+						 onmouseover="this.src='/images/remove_icon_2.png'" onmouseout="this.src='/images/remove_icon_1.png'" (click)="removeItem(product.cartContentID)" />
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+
+
+		<div>
+			<pagination-controls class="pull-left margin_top_15" (pageChange)="p = $event" directionLinks="true" previousLabel="" nextLabel="" maxSize="7"></pagination-controls>
+			<button type="button" class="btn btn-default pull-right button_blue" (click)="staticModal.show()">Checkout</button>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+
+	<div class="modal fade" bsModal #staticModal="bs-modal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal_body text-center">
+				<div class="modal_header">
+					<h2 class="col-md-12">Order Information</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="modal_body">
+					<form name="form1" #form1="ngForm" style="margin-top:20px">
+						<div class="group">
+							<input type="text" class="input_text" name="OName" #OName="ngModel" pattern="([A-Z]){1}([A-Za-z]){2,}" [(ngModel)]="orderModel.userName" required />
+							<label class="label"> Name </label>
+							<img style="margin-left:10px" *ngIf="!OName.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="OName.dirty && OName.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="OName.dirty && OName.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: Andrew, John" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="OPhone" #OPhone="ngModel" pattern="([+]){1}([0-9]){8,19}" [(ngModel)]="orderModel.phone" required />
+							<label class="label"> Phone </label>
+							<img style="margin-left:10px" *ngIf="!OPhone.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="OPhone.dirty && OPhone.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="OPhone.dirty && OPhone.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: Andrew, John" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="OAndress" #OAndress="ngModel" pattern="" [(ngModel)]="orderModel.deliveryAddress" required />
+							<label class="label"> Delivery Address </label>
+							<img style="margin-left:10px" *ngIf="!OAndress.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="OAndress.dirty && OAndress.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="OAndress.dirty && OAndress.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: Andrew, John" />
+						</div>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+				<div class="modal_footer">
+					<div>
+						<div class="col-md-3">
+							<button *ngIf="form1.valid" class="btn btn-default pull-left" style="border-radius: 0px; background-color: #e5ebf1" (click)="checkout()">Accept</button>
+							<button *ngIf="!form1.valid" [disabled]="true" class="btn btn-default pull-left" style="border-radius: 0px; background-color: #e5ebf1" (click)="checkout()">Accept</button>
+						</div>
+						<!--<div class="alert-danger col-md-6 text-center error_stl" [hidden]="!signInError?.error">{{signInError?.error}}</div>-->
+						<div class="col-md-3 pull-right"><button type="button" id="btn_close" style="border-radius: 0px; background-color: #e5ebf1" class="btn btn-default pull-right" (click)="staticModal.hide()">Close</button></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

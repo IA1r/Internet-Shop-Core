@@ -1,0 +1,84 @@
+﻿<div style="box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.12); background-color:white ;padding: 12px;">
+
+	<div class="center-block" style="width:600px; margin-bottom:15px">
+		<input type="text" class="input_text" style="width:30%" [(ngModel)]="productID" (change)="keyword = null" placeholder="id" required /> or
+		<input type="text" class="input_text" style="width:50%" [(ngModel)]="keyword" (change)="productID = null" placeholder="keyword" required />
+
+		<input type="button" value="search" class="btn btn-default button_style" style="margin-left:15px" (click)="searchPoducts(productID,keyword)" />
+	</div>
+
+	<div [hidden]="true" class="center-block margin_top_30" id="searchProduct" style="width:1000px">
+		<div *ngIf="searchedProducts?.length > 0">
+			<div *ngFor="let product of searchedProducts | paginate: { itemsPerPage: 4, currentPage: ps }" style="width:23%; margin-right:15px; margin-bottom:15px; border:solid grey 1px" class="pull-left">
+				<div class="text-center"> <a [routerLink]="['/product', product.productID]">{{ product.characteristic.Name }}</a> </div>
+
+				<div><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%; height:325px" /></div>
+				<div><span class="pull-left">{{product.type}} : {{product.characteristic.Genre}} </span> <span class="pull-right">${{product.characteristic.Price}} USD</span></div>
+			</div>
+
+			<div style="width:20px" class="pull-right">
+				<img src="/images/remove_icon_1.png" class="pull-left cursor" style="width:100%"
+					 onmouseover="this.src='/images/remove_icon_2.png'" onmouseout="this.src='/images/remove_icon_1.png'" (click)="cancel()" />
+			</div>
+
+			<div class="clearfix"></div>
+			<pagination-controls class="pull-right" (pageChange)="ps = $event" directionLinks="true" previousLabel="" nextLabel="" maxSize="7"></pagination-controls>
+			<div class="clearfix"></div>
+		</div>
+		<div [hidden]="true" id="noReulst" class="alert-danger text-center alert_blue center-block" style="width:500px"></div>
+		<div class="clearfix"></div>
+		<hr />
+	</div>
+
+
+	<div class="btn-group pull-left" style="margin-top:32px" dropdown [autoClose]="false" container="body">
+		<button dropdownToggle type="button" class="btn btn-default button_style dropdown-toggle glyphicon glyphicon-list"></button>
+		<ul *dropdownMenu class="dropdown-menu cursor menu" role="menu">
+
+			<li role="menuitem"><a class="dropdown-item" (click)="getProducts()">All Produtcs</a></li>
+
+			<li role="menuitem" dropdown placement="right" container="body">
+				<a dropdownToggle class="dropdown-item dropdown-toggle"
+				   (click)="false">Entertainment<span class="caret-right"></span></a>
+				<ul *dropdownMenu class="dropdown-menu menu" role="menu">
+					<li role="menuitem"><a class="dropdown-item cursor" (click)="getProductsByType(1)">PC-Game</a></li>
+					<li role="menuitem"><a class="dropdown-item cursor" (click)="getProductsByType(2)">Manga</a></li>
+				</ul>
+			</li>
+
+			<li role="menuitem" dropdown placement="right" container="body">
+				<a dropdownToggle class="dropdown-item dropdown-toggle"
+				   (click)="false">Сlothes<span class="caret-right"></span></a>
+				<ul *dropdownMenu class="dropdown-menu menu" role="menu">
+					<li role="menuitem"><a class="dropdown-item cursor" (click)="getProductsByType(3)">T-shirt</a></li>
+				</ul>
+			</li>
+
+			<li role="menuitem" dropdown placement="right" container="body">
+				<a dropdownToggle class="dropdown-item dropdown-toggle"
+				   (click)="false">Сaccessories<span class="caret-right"></span></a>
+				<ul *dropdownMenu class="dropdown-menu menu" role="menu">
+					<li role="menuitem"><a class="dropdown-item cursor" (click)="getProductsByType(5)">RAM</a></li>
+					<li role="menuitem"><a class="dropdown-item cursor" (click)="getProductsByType(4)">SSD</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="center-block" style="width:1000px">
+		<div style="width:500px" class="center-block text-center"><h2>{{filterType}}</h2></div>
+		<div *ngFor="let product of products | paginate: { itemsPerPage: 12, currentPage: p }" style="width:23%; margin-right:15px; margin-bottom:15px; border:solid grey 1px" class="pull-left">
+			<div class="text-center"> <a [routerLink]="['/product', product.productID]">{{ product.characteristic.Name }}</a> </div>
+
+			<div><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%; height:325px" /></div>
+			<div><span class="pull-left">{{product.type}} : {{product.characteristic.Genre}} </span> <span class="pull-right">${{product.characteristic.Price}} USD</span></div>
+		</div>
+		<div class="clearfix"></div>
+		<pagination-controls class="pull-right" (pageChange)="p = $event" directionLinks="true" previousLabel="" nextLabel="" maxSize="7"></pagination-controls>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+
+

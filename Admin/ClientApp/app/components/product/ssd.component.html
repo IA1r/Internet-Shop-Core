@@ -1,0 +1,123 @@
+﻿<div *ngIf="!IsEdit">
+	<div class="card_title">
+		<h2 class="pull-left">{{product?.characteristic?.Name}} </h2>
+		<h2 class="pull-right">${{product?.characteristic?.Price}} USD</h2>
+		<div class="clearfix"></div>
+	</div>
+
+	<div>
+		<div class="pull-left card_image"><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%" /></div>
+		<div class="pull-right" style="width:600px">
+			<div class="card_characteristic">
+				<h3>General information</h3>
+				<div style="margin-left:10px">
+					<div><span><b>Name:</b>  {{product?.characteristic?.Name}} </span></div>
+					<div><span><b>Capacity:</b>  {{product?.characteristic?.Capacity}} </span></div>
+					<div><span> <b>Reading Speed:</b>  {{product?.characteristic?.ReadingSpeed}} </span></div>
+					<div><span> <b>Recording Speed:</b>  {{product?.characteristic?.RecordingSpeed}} </span></div>
+					<div><span> <b>Energy Consumption:</b>  {{product?.characteristic?.EnergyConsumption}} </span></div>
+					<div><span> <b> MTBF:</b> {{product?.characteristic?.MTBF}} </span></div>
+					<div><span> <b>Form Factor:</b>  {{product?.characteristic?.FormFactor}} </span></div>
+					<div><span> <b>Stability to shock loads: </b> {{product?.characteristic?.StabilityToShockLoads}} </span></div>
+					<div><span> <b>Type of memory cells:</b> {{product?.characteristic?.TypeOfMemoryCells}} </span></div>
+					<div><span> <b>Interface:</b>  {{product?.characteristic?.Interface}} </span></div>
+					<div><span> <b>Drive Type:</b>  {{product?.characteristic?.DriveType}} </span></div>
+					<div><span> <b>Size: </b> {{product?.characteristic?.Size}} </span></div>
+					<div><span> <b>Weight:</b> {{product?.characteristic?.Weight}} </span></div>
+					<div><span> <b>Guarantee:</b>  {{product?.characteristic?.Guarantee}} </span></div>
+				</div>
+			</div>
+			<div class="margin_top_15">
+				<div id="successUpdate" class="alert-danger col-md-9 text-center alert_blue" [hidden]="true"></div>
+				<div> <input type="button" class="btn btn-default pull-right button_style" (click)="isEdit(true)" value="Edit" /></div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<div *ngIf="IsEdit" class="margin_top_30">
+	<div>
+		<div><input class="btn button_style btn-default" type="button" value="Update Image" onclick="document.getElementById('imageUpdate').click()" /></div>
+		<input type="file" ng2FileSelect [uploader]="uploader" style="display:none" id="imageUpdate" (change)="updateImg()" />
+
+		<div class="pull-left card_image"><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%" /></div>
+		<div class="pull-right" style="width:600px">
+			<div class="card_characteristic">
+				<h3>General information</h3>
+				<div style="margin-left:10px;margin-top:25px">
+					<div class="group">
+						<input type="text" class="input_text" name="Name" [(ngModel)]="product.characteristic['Name']" required />
+						<label class="label"> Name </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Capacity" [(ngModel)]="product.characteristic['Capacity']" required />
+						<label class="label"> Capacity </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="ReadingSpeed" [(ngModel)]="product.characteristic['ReadingSpeed']" required />
+						<label class="label"> Reading Speed </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="RecordingSpeed" [(ngModel)]="product.characteristic['RecordingSpeed']" required />
+						<label class="label"> Recording Speed </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="EnergyConsumption" [(ngModel)]="product.characteristic['EnergyConsumption']" required />
+						<label class="label"> Energy Consumption </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="MTBF" [(ngModel)]="product.characteristic['MTBF']" required />
+						<label class="label"> MTBF </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="FormFactor" [(ngModel)]="product.characteristic['FormFactor']" required />
+						<label class="label"> Form Factor </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="StabilityToShockLoads" [(ngModel)]="product.characteristic['StabilityToShockLoads']" required />
+						<label class="label"> Stability to shock loads </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="TypeOfMemoryCells" [(ngModel)]="product.characteristic['TypeOfMemoryCells']" required />
+						<label class="label"> Type of memory cells </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Interface" [(ngModel)]="product.characteristic['Interface']" required />
+						<label class="label"> Interface </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="DriveType" [(ngModel)]="product.characteristic['DriveType']" required />
+						<label class="label"> Drive Type </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Size" [(ngModel)]="product.characteristic['Size']" required />
+						<label class="label"> Size </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Weight" [(ngModel)]="product.characteristic['Weight']" required />
+						<label class="label"> Weight </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Guarantee" [(ngModel)]="product.characteristic['Guarantee']" required />
+						<label class="label"> Guarantee </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Price" [(ngModel)]="product.characteristic['Price']" required />
+						<label class="label"> Price </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Quantity" [(ngModel)]="product.characteristic['Quantity']" required />
+						<label class="label"> Quantity </label>
+					</div>
+				</div>
+			</div>
+			<div class="margin_top_15">
+				<div> <input type="button" class="btn btn-default pull-right button_style" (click)="cancel()" value="Cancel" /></div>
+				<div> <input type="button" class="btn btn-default pull-right button_style" style="margin-right:20px" (click)="update(product)" value="Save" /></div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+

@@ -1,0 +1,37 @@
+
+/* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+.body-content {
+	padding-top: 50px;
+}
+
+.header {
+	display: block;
+	min-width: 1200px;
+	margin: auto;
+	padding: 12px 0;
+	text-align: center;
+	background-color: #507299;
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.275);
+}
+
+.body {
+	width: 1200px;
+	margin: auto;
+	background-color: #edeef0;
+	min-height: 1000px;
+}
+
+.footer {
+	display: block;
+	overflow: hidden;
+	min-width: 1200px;
+	margin: auto;
+	min-height: 50px;
+	text-align: center;
+	background-color: #507299;
+	box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.275);
+	color: white;
+}
+.margin_top_5{
+	margin-top:5px;
+}

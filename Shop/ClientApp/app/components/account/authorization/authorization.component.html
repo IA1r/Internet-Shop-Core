@@ -1,0 +1,136 @@
+﻿<div class="pull-right" *ngIf="!currentUser.isAuthenticated">
+	<div class="btn-group" dropdown placement="bottom right">
+		<button dropdownToggle type="button" class="btn btn-default dropdown-toggle" style="border-radius: 0px; background-color: #e5ebf1">
+			Guest <span class="caret"></span>
+		</button>
+		<ul *dropdownMenu class="dropdown-menu dropdown-menu-right menu" role="menu">
+			<li role="menuitem"><a class="dropdown-item menu_link" routerLink="/shopping-cart"> Shopping Cart </a></li>
+			<li role="menuitem"><a class="dropdown-item menu_link" routerLink="/orders"> Orders </a></li>
+			<li class="divider dropdown-divider"></li>
+			<li role="menuitem"><a class="dropdown-item menu_link " (click)="staticModal.show()">Sign In</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="pull-right" *ngIf="currentUser.isAuthenticated">
+	<div class="btn-group" dropdown placement="bottom right">
+		<button dropdownToggle type="button" class="btn btn-default dropdown-toggle" style="border-radius: 0px; background-color: #e5ebf1">
+			{{currentUser.userName}} <span class="caret"></span>
+		</button>
+		<ul *dropdownMenu class="dropdown-menu dropdown-menu-right menu" role="menu">
+			<li role="menuitem"><a class="dropdown-item menu_link" routerLink="/shopping-cart"> Shopping Cart </a></li>
+			<li role="menuitem"><a class="dropdown-item menu_link" routerLink="/orders"> Orders </a></li>
+			<li class="divider dropdown-divider"></li>
+			<li role="menuitem"><a class="dropdown-item menu_link" (click)="signOut()" href="#">Sign Out</a></li>
+		</ul>
+	</div>
+</div>
+<div class="clearfix"></div>
+
+
+
+
+<div class="modal fade" bsModal #staticModal="bs-modal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal_body">
+			<div class="modal_header">
+				<div>
+					<div class="col-md-6" [ngClass]="{'auth_selected': (authType == 'Registration')}"><h2 (click)="selectAuthType('Registration')">Registration</h2></div>
+					<div class="col-md-6" [ngClass]="{'auth_selected': (authType == 'SignIn')}"><h2 (click)="selectAuthType('SignIn')">SignIn</h2></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div [hidden]="!(authType == 'Registration')">
+				<div class="modal_body">
+					<form name="form1"  #form1="ngForm" style="margin-top:20px">
+						<div class="group">
+							<input type="text" class="input_text" name="RLogin" #RLogin="ngModel" pattern="([A-Z|0-9]){1}([A-Za-z0-9]){2,}" [(ngModel)]="registrationModel.Login" required />
+							<label class="label"> Login </label>
+							<img style="margin-left:10px" *ngIf="!RLogin.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="RLogin.dirty && RLogin.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="RLogin.dirty && RLogin.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: Air, AGumenyuk" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="REmail" #REmail="ngModel" pattern="([A-Za-z0-9])+@([a-z])+\.(ua|net|com|ru)" [(ngModel)]="registrationModel.Email" required />
+							<label class="label"> Email </label>
+							<img style="margin-left:10px" *ngIf="!REmail.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="REmail.dirty && REmail.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="REmail.dirty && REmail.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: ichika@i.ua" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="RPassword" #RPassword="ngModel" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).+$" [(ngModel)]="registrationModel.Password" required />
+							<label class="label"> Password </label>
+							<img style="margin-left:10px" *ngIf="!RPassword.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="RPassword.dirty && RPassword.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="RPassword.dirty && RPassword.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: !7ijsx5m7ijsx5M" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="RConfirmPassword" #RConfirmPassword="ngModel" [equalTo]="RPassword" [(ngModel)]="registrationModel.ConfirmPassword" required />
+							<label class="label"> ConfirmPassword </label>
+							<img style="margin-left:10px" *ngIf="!RConfirmPassword.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="RConfirmPassword.dirty && RConfirmPassword.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="RConfirmPassword.dirty && RConfirmPassword.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Equal to password" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="Country" #Country="ngModel" pattern="\w{3,}" [(ngModel)]="registrationModel.Country" required />
+							<label class="label"> Country </label>
+							<img style="margin-left:10px" *ngIf="!Country.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="Country.dirty && Country.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="Country.dirty && Country.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: Japan" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="RYear" #RYear="ngModel" pattern="\d{4}" [(ngModel)]="registrationModel.Year" required />
+							<label class="label"> Year </label>
+							<img style="margin-left:10px" *ngIf="!RYear.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="RYear.dirty && RYear.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="RYear.dirty && RYear.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: 1995" />
+						</div>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+				<div class="modal_footer">
+					<div>
+						<div class="alert-danger col-md-9 text-center error_stl pull-left" id="regError" [hidden]="true"></div>
+						<div class="col-md-3">
+							<button *ngIf="form1.valid" class="btn btn-default pull-right" style="border-radius: 0px; background-color: #e5ebf1" (click)="registration(registrationModel)">Registration</button>
+							<button *ngIf="!form1.valid" [disabled]="true" class="btn btn-default pull-right" style="border-radius: 0px; background-color: #e5ebf1" (click)="registration(registrationModel)">Registration</button>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div [hidden]="!(authType == 'SignIn')">
+				<div class="modal_body">
+					<form name="form2" #form2="ngForm" style="margin-top:20px">
+						<div class="group">
+							<input type="text" class="input_text" name="SLogin" #SLogin="ngModel" pattern="([A-Z|0-9]){1}([A-Za-z0-9]){2,}" [(ngModel)]="signInModel.Login" required />
+							<label class="label"> Login </label>
+							<img style="margin-left:10px" *ngIf="!SLogin.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="SLogin.dirty && SLogin.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="SLogin.dirty && SLogin.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: Air, AGumenyuk" />
+						</div>
+						<div class="group">
+							<input type="text" class="input_text" name="SPassword" #SPassword="ngModel" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).+$" [(ngModel)]="signInModel.Password" required />
+							<label class="label"> Password </label>
+							<img style="margin-left:10px" *ngIf="!SPassword.dirty" src="/images/attention_blue_2.png" data-toggle="tooltip" data-placement="right" title="Required" />
+							<img style="margin-left:10px" *ngIf="SPassword.dirty && SPassword.valid" src="/images/correct.png" data-toggle="tooltip" data-placement="right" title="Valid" />
+							<img style="margin-left:10px" *ngIf="SPassword.dirty && SPassword.invalid" src="/images/attention_red.png" data-toggle="tooltip" data-placement="right" title="Ex: !7ijsx5m7ijsx5M" />
+						</div>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+				<div class="modal_footer">
+					<div>
+						<div class="alert-danger col-md-9 text-center error_stl pull-left" id="signInError" [hidden]="true"></div>
+						<div class="col-md-3 pull-right">
+							<button *ngIf="form2.valid" class="btn btn-default pull-right" style="border-radius: 0px; background-color: #e5ebf1" (click)="signIn(signInModel)">SignIn</button>
+							<button *ngIf="!form2.valid" [disabled]="true" class="btn btn-default pull-right" style="border-radius: 0px; background-color: #e5ebf1" (click)="signIn(signInModel)">SignIn</button>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

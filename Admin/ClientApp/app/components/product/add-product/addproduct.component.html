@@ -1,0 +1,31 @@
+﻿<div class="card_title">
+	<div class="center-block">
+		<h2 class="pull-left">Select the appropriate product type -->  </h2>
+		<select [(ngModel)]="selectedType" (change)="initDictionaryFields(selectedType)" class="input_text pull-left margin_left_30 margin_top_30">
+			<option [value]="''">-Select type-</option>
+			<option *ngFor="let p of productTypes" [value]="p.productTypeID">{{p.value}}</option>
+		</select>
+		<div class="clearfix"></div>
+	</div>
+	
+</div>
+
+<div *ngIf="selectedType == 1">
+	<add-pc-game [product]=product [uploader]=uploader [success]=success [successUpload]=successUpload (addProductToDB)="addProductToDB($event)" (updateImage)="updateImage($event)"></add-pc-game>
+</div>
+
+<div *ngIf="selectedType == 2">
+	<add-manga [product]=product [uploader]=uploader [success]=success [successUpload]=successUpload (addProductToDB)="addProductToDB($event)" (updateImage)="updateImage($event)"></add-manga>
+</div>
+
+<div *ngIf="selectedType == 3">
+	<add-t-shirt [product]=product [uploader]=uploader [success]=success [successUpload]=successUpload (addProductToDB)="addProductToDB($event)" (updateImage)="updateImage($event)"></add-t-shirt>
+</div>
+
+<div *ngIf="selectedType == 4">
+	<add-ssd [product]=product [uploader]=uploader [success]=success [successUpload]=successUpload (addProductToDB)="addProductToDB($event)" (updateImage)="updateImage($event)"></add-ssd>
+</div>
+
+<div *ngIf="selectedType == 5">
+	<add-ram [product]=product [uploader]=uploader [success]=success [successUpload]=successUpload (addProductToDB)="addProductToDB($event)" (updateImage)="updateImage($event)"></add-ram>
+</div>

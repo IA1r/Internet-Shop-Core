@@ -1,0 +1,71 @@
+﻿.group {
+	position: relative;
+	margin-bottom: 35px;
+}
+
+.input_text {
+	border: 0;
+	background: white no-repeat;
+	text-align: center;
+	background-image: linear-gradient(to bottom, #507299, #507299), linear-gradient(to bottom, silver, silver);
+	background-size: 0 2px, 100% 1px;
+	background-position: 50% 100%, 50% 100%;
+	transition: background-size 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+	font-size: 18px;
+}
+
+	.input_text:focus {
+		background-size: 100% 2px, 100% 1px;
+		outline: none;
+	}
+
+.label {
+	color: gray !important;
+	font-size: 18px !important;
+	font-weight: normal !important;
+	position: absolute;
+	pointer-events: none;
+	transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-webkit-transition: 0.2s ease all;
+	margin-left: -68%;
+}
+
+/*active state*/
+input:focus ~ .label, input:valid ~ .label {
+	top: -20px;
+	font-size: 14px !important;
+	color: #5264AE;
+}
+
+fieldset.scheduler-border {
+	border: 1px groove #ddd !important;
+	padding: 0 1.4em 1.4em 1.4em !important;
+	margin: 0 0 1.5em 0 !important;
+	-webkit-box-shadow: 0px 0px 0px 0px #000;
+	box-shadow: 0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+	font-size: 1.2em !important;
+	font-weight: bold !important;
+	text-align: left !important;
+	width: auto;
+	padding: 0 10px;
+	border-bottom: none;
+}
+
+.margin_left_30 {
+	margin-left: 30px;
+}
+.margin_top_30 {
+	margin-top: 30px;
+}
+
+
+.card_title {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.12);
+	background-color: white;
+	padding-left: 12px;
+	padding-right: 12px;
+}

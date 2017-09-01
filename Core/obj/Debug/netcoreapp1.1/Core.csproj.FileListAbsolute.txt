@@ -1,0 +1,14 @@
+D:\C#\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.deps.json
+D:\C#\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.dll
+D:\C#\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.pdb
+D:\C#\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.AssemblyInfo.cs
+D:\C#\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.dll
+D:\C#\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.pdb
+D:\C#\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.csprojResolveAssemblyReference.cache
+D:\CSharp\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.deps.json
+D:\CSharp\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.dll
+D:\CSharp\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.pdb
+D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.csprojResolveAssemblyReference.cache
+D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.AssemblyInfo.cs
+D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.dll
+D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.pdb

@@ -1,0 +1,89 @@
+﻿<div *ngIf="!IsEdit">
+	<div class="card_title">
+		<h2 class="pull-left">{{product?.characteristic?.Name}} </h2>
+		<h2 class="pull-right">${{product?.characteristic?.Price}} USD</h2>
+		<div class="clearfix"></div>
+	</div>
+
+	<div>
+		<div class="pull-left card_image"><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%" /></div>
+		<div class="pull-right" style="width:600px">
+			<div class="card_characteristic">
+				<h3>General information</h3>
+				<div style="margin-left:10px">
+					<div><span><b>Name:</b>  {{product?.characteristic?.Name}} </span></div>
+					<div><span><b>Genre:</b>  {{product?.characteristic?.Genre}} </span></div>
+					<div><span> <b>Tom:</b>  {{product?.characteristic?.Tom}} </span></div>
+					<div><span> <b>Author:</b>  {{product?.characteristic?.Author}} </span></div>
+					<div><span> <b>ReleaseDate:</b>  {{product?.characteristic?.ReleaseDate}} </span></div>
+					<div><span> <b> Restrictions:</b> {{product?.characteristic?.Restrictions}} </span></div>
+					<div><span> <b>Publisher:</b>  {{product?.characteristic?.Publisher}} </span></div>
+					<div><span> <b>Language:</b>  {{product?.characteristic?.Language}} </span></div>
+					<div><span> <b>Discription: </b> {{product?.characteristic?.Discription}} </span></div>
+				</div>
+			</div>
+			<div class="margin_top_15">
+				<div id="successUpdate" class="alert-danger col-md-9 text-center alert_blue" [hidden]="true"></div>
+				<div> <input type="button" class="btn btn-default pull-right button_style" (click)="isEdit(true)" value="Edit" /></div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<div *ngIf="IsEdit" class="margin_top_30">
+	<div>
+		<div><input class="btn button_style btn-default" type="button" value="Update Image" onclick="document.getElementById('imageUpdate').click()" /></div>
+		<input type="file" ng2FileSelect [uploader]="uploader" style="display:none" id="imageUpdate" (change)="updateImg()" />
+
+		<div class="pull-left card_image"><img src="https://drive.google.com/uc?export=view&id={{product?.characteristic?.Image}}" style="width:100%" /></div>
+		<div class="pull-right" style="width:600px">
+			<div class="card_characteristic">
+				<h3>General information</h3>
+				<div style="margin-left:10px;margin-top:25px">
+					<div class="group">
+						<input type="text" class="input_text" name="Name" [(ngModel)]="product.characteristic['Name']" required />
+						<label class="label"> Name </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Genre" [(ngModel)]="product.characteristic['Genre']" required />
+						<label class="label"> Genre </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Tom" [(ngModel)]="product.characteristic['Tom']" required />
+						<label class="label"> Tom </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Author" [(ngModel)]="product.characteristic['Author']" required />
+						<label class="label"> Author </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="ReleaseDate" [(ngModel)]="product.characteristic['ReleaseDate']" required />
+						<label class="label"> ReleaseDate </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Restrictions" [(ngModel)]="product.characteristic['Restrictions']" required />
+						<label class="label"> Restrictions </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Publisher" [(ngModel)]="product.characteristic['Publisher']" required />
+						<label class="label"> Publisher </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Language" [(ngModel)]="product.characteristic['Language']" required />
+						<label class="label"> Language </label>
+					</div>
+					<div class="group">
+						<input type="text" class="input_text" name="Discription" [(ngModel)]="product.characteristic['Discription']" required />
+						<label class="label"> Discription </label>
+					</div>
+				</div>
+			</div>
+			<div class="margin_top_15">
+				<div> <input type="button" class="btn btn-default pull-right button_style" (click)="cancel()" value="Cancel" /></div>
+				<div> <input type="button" class="btn btn-default pull-right button_style" style="margin-right:20px" (click)="update(product)" value="Save" /></div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>

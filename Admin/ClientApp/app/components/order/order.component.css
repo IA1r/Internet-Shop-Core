@@ -1,0 +1,67 @@
+﻿.hr {
+	border-bottom: solid 1px lightgrey;
+}
+
+	.hr:hover {
+		border-bottom: solid 1px #507299;
+		cursor: pointer;
+	}
+
+
+::-webkit-scrollbar {
+	width: 1px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #000000;
+	border: 1px solid #555555;
+}
+
+.cursor:hover {
+	cursor: pointer;
+}
+
+.margin_bot_15{
+	margin-bottom:15px;
+}
+
+.margin_top_12{
+	margin-top:12px;
+}
+
+
+.card_list {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.12);
+	background-color: white;
+	padding: 12px;
+	margin-top: 15px;
+	width: 300px;
+	height: 452px;
+	overflow-y: scroll
+}
+
+.card_order {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.12);
+	background-color: white;
+	padding: 12px;
+	margin-top: 15px;
+	width: 850px;
+	margin-left:50px;
+}
+
+
+/*.card_characteristic {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.12);
+	background-color: white;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-bottom: 12px;
+	padding-top: 0.1px;
+	width: 600px;
+	margin-top: 15px;
+}*/

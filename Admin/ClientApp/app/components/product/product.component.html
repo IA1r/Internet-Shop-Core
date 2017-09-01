@@ -1,0 +1,26 @@
+﻿
+<div *ngIf="responseStatus?.success">
+	<div *ngIf="product?.type == 'PC-Game'">
+		<pc-game [product]=product (updateProduct)="updateProduct($event)" [uploader]=uploader (setIsEdit)="setIsEdit($event)" (updateImage)="updateImage($event)" (cancelUpdate)="cancelUpdate($event)"></pc-game>
+	</div>
+
+	<div *ngIf="product?.type == 'Manga'">
+		<manga [product]=product (updateProduct)="updateProduct($event)" [uploader]=uploader (setIsEdit)="setIsEdit($event)" (updateImage)="updateImage($event)" (cancelUpdate)="cancelUpdate($event)"></manga>
+	</div>
+
+	<div *ngIf="product?.type == 'T-shirt'">
+		<t-shirt [product]=product (updateProduct)="updateProduct($event)" [uploader]=uploader (setIsEdit)="setIsEdit($event)" (updateImage)="updateImage($event)" (cancelUpdate)="cancelUpdate($event)"></t-shirt>
+	</div>
+
+	<div *ngIf="product?.type == 'SSD'">
+		<ssd [product]=product (updateProduct)="updateProduct($event)" [uploader]=uploader (setIsEdit)="setIsEdit($event)" (updateImage)="updateImage($event)" (cancelUpdate)="cancelUpdate($event)"></ssd>
+	</div>
+
+	<div *ngIf="product?.type == 'RAM'">
+		<ram [product]=product (updateProduct)="updateProduct($event)" [uploader]=uploader (setIsEdit)="setIsEdit($event)" (updateImage)="updateImage($event)" (cancelUpdate)="cancelUpdate($event)"></ram>
+	</div>
+</div>
+
+<div *ngIf="!responseStatus?.success" class="alert-danger col-md-6 text-center alert_blue pull-left">
+	<div>{{responseStatus?.message}} </div>
+</div>
