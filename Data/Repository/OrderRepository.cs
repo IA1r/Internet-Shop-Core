@@ -11,15 +11,28 @@ using Core.Interface.Repository;
 
 namespace Data.Repository
 {
+	/// <summary>
+	/// Implements repository for orders.
+	/// </summary>
+	/// <seealso cref="Core.Interface.Repository.IOrderRepository" />
 	public class OrderRepository : IOrderRepository
 	{
 		private IUnitOfWork unitOfWork;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="OrderRepository"/> class.
+		/// </summary>
+		/// <param name="unitOfWork">The unit of work.</param>
 		public OrderRepository(IUnitOfWork unitOfWork)
 		{
 			this.unitOfWork = unitOfWork;
 		}
 
+		/// <summary>
+		/// Gets the order.
+		/// </summary>
+		/// <param name="orderID">The order identifier.</param>
+		/// <returns>Order Dto</returns>
 		public async Task<OrderDto> GetOrder(int orderID)
 		{
 			OrderDto order = await this.unitOfWork.Set<Order>()
@@ -49,6 +62,12 @@ namespace Data.Repository
 			return order;
 		}
 
+		/// <summary>
+		/// Gets the order list for specified user.
+		/// </summary>
+		/// <param name="userID">The user identifier.</param>
+		/// <param name="guestID">The guest identifier.</param>
+		/// <returns>Order list</returns>
 		public async Task<OrderDto[]> GetOrderList(string userID, string guestID)
 		{
 			OrderDto[] orders = await this.unitOfWork.Set<Order>()
@@ -63,6 +82,10 @@ namespace Data.Repository
 			return orders;
 		}
 
+		/// <summary>
+		/// Gets the order list of all users.
+		/// </summary>
+		/// <returns>Order list</returns>
 		public async Task<OrderDto[]> GetOrderList()
 		{
 			OrderDto[] orders = await this.unitOfWork.Set<Order>()
@@ -78,6 +101,11 @@ namespace Data.Repository
 			return orders;
 		}
 
+		/// <summary>
+		/// Confirms the specified order.
+		/// </summary>
+		/// <param name="orderID">The order identifier.</param>
+		/// <exception cref="ArgumentException">Order not found</exception>
 		public async Task ConfirmOrder(int orderID)
 		{
 			if (!await this.unitOfWork.Set<Order>().AnyAsync(o => o.OrderID == orderID))
@@ -89,6 +117,11 @@ namespace Data.Repository
 			await this.unitOfWork.SaveAsync();
 		}
 
+		/// <summary>
+		/// Deletes the specified order.
+		/// </summary>
+		/// <param name="orderID">The order identifier.</param>
+		/// <exception cref="ArgumentException">Order not found</exception>
 		public async Task DeleteOrder(int orderID)
 		{
 			if (!await this.unitOfWork.Set<Order>().AnyAsync(o => o.OrderID == orderID))

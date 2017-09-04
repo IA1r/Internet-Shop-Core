@@ -12,14 +12,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository
 {
+
+	/// <summary>
+	/// Implements repository for shopping cart.
+	/// </summary>
+	/// <seealso cref="Core.Interface.Repository.ICartRepository" />
 	public class CartRepository : ICartRepository
 	{
+
+		/// <summary>
+		/// The unit of work
+		/// </summary>
 		private IUnitOfWork unitOfWork;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="CartRepository"/> class.
+		/// </summary>
+		/// <param name="unitOfWork">The unit of work.</param>
 		public CartRepository(IUnitOfWork unitOfWork)
 		{
 			this.unitOfWork = unitOfWork;
 		}
 
+
+		/// <summary>
+		/// Adds the product to shoping cart.
+		/// </summary>
+		/// <param name="productID">The product identifier.</param>
+		/// <param name="userID">The user/cart identifier.</param>
+		/// <exception cref="ArgumentException">Product not found</exception>
 		public async Task AddProduct(int productID, string userID)
 		{
 			if (!await this.unitOfWork.Set<Product>().AnyAsync(p => p.ProductID == productID))
@@ -47,6 +68,12 @@ namespace Data.Repository
 			}
 		}
 
+
+		/// <summary>
+		/// Gets the shopping cart products.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <returns>Shopping Cart Dto.</returns>
 		public async Task<ShoppingCartDto> GetShoppingCartProducts(string id)
 		{
 			if (!await this.unitOfWork.Set<ShoppingCart>().AnyAsync(sc => sc.ShoppingCartID == id))
@@ -81,6 +108,11 @@ namespace Data.Repository
 			return shoppingCart;
 		}
 
+		/// <summary>
+		/// Deletes the item from shopping cart.
+		/// </summary>
+		/// <param name="cartContentID">The cart item identifier.</param>
+		/// <exception cref="ArgumentException">Item not found</exception>
 		public async Task DeleteItem(int cartContentID)
 		{
 			if (!await this.unitOfWork.Set<CartContent>().AnyAsync(cc => cc.CartContentID == cartContentID))
@@ -91,6 +123,10 @@ namespace Data.Repository
 			await this.unitOfWork.SaveAsync();
 		}
 
+		/// <summary>
+		/// Checkouts from shopping cart.
+		/// </summary>
+		/// <param name="order">The order.</param>
 		public async Task Checkout(OrderDto order)
 		{
 			await this.unitOfWork.Set<Order>().AddAsync(new Order

@@ -17,6 +17,7 @@ D:\CSharp\InternetShop\Business\bin\Debug\netcoreapp1.1\Data.dll
 D:\CSharp\InternetShop\Business\bin\Debug\netcoreapp1.1\Data.pdb
 D:\CSharp\InternetShop\Business\bin\Debug\netcoreapp1.1\Core.pdb
 D:\CSharp\InternetShop\Business\obj\Debug\netcoreapp1.1\Business.csprojResolveAssemblyReference.cache
+D:\CSharp\InternetShop\Business\obj\Debug\netcoreapp1.1\Business.csproj.CoreCompileInputs.cache
 D:\CSharp\InternetShop\Business\obj\Debug\netcoreapp1.1\Business.AssemblyInfo.cs
 D:\CSharp\InternetShop\Business\obj\Debug\netcoreapp1.1\Business.dll
 D:\CSharp\InternetShop\Business\obj\Debug\netcoreapp1.1\Business.pdb

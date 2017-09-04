@@ -6,12 +6,42 @@ using System.Threading.Tasks;
 
 namespace Core.Interface.Manager
 {
+	/// <summary>
+	/// Represents methods for OrderManager. 
+	/// </summary>
 	public interface IOrderManager
 	{
+		/// <summary>
+		/// Gets the order.
+		/// </summary>
+		/// <param name="orderID">The order identifier.</param>
+		/// <returns>Order Dto</returns>
 		Task<OrderDto> GetOrder(int orderID);
+
+		/// <summary>
+		/// Gets the order list for specified user.
+		/// </summary>
+		/// <param name="userID">The user identifier.</param>
+		/// <param name="guestID">The guest identifier.</param>
+		/// <returns>Order list</returns>
 		Task<OrderDto[]> GetOrderList(string userID, string guestID);
+
+		/// <summary>
+		/// Gets the order list of all users.
+		/// </summary>
+		/// <returns>Order list</returns>
 		Task<OrderDto[]> GetOrderList();
+
+		/// <summary>
+		/// Confirms the specified order.
+		/// </summary>
+		/// <param name="orderID">The order identifier.</param>
 		Task ConfirmOrder(int orderID);
+
+		/// <summary>
+		/// Deletes the specified order.
+		/// </summary>
+		/// <param name="orderID">The order identifier.</param>
 		Task DeleteOrder(int orderID);
 	}
 }

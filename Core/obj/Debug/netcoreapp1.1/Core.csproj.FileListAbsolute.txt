@@ -9,6 +9,7 @@ D:\CSharp\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.deps.json
 D:\CSharp\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.dll
 D:\CSharp\InternetShop\Core\bin\Debug\netcoreapp1.1\Core.pdb
 D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.csprojResolveAssemblyReference.cache
+D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.csproj.CoreCompileInputs.cache
 D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.AssemblyInfo.cs
 D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.dll
 D:\CSharp\InternetShop\Core\obj\Debug\netcoreapp1.1\Core.pdb

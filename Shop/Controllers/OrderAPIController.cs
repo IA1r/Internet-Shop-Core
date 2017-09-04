@@ -11,17 +11,37 @@ using Shop.ResopnseModel;
 
 namespace Shop.Controllers
 {
+	/// <summary>
+	/// Implemets API controller to manage orders
+	/// </summary>
+	/// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
 	[Produces("application/json")]
 	[Route("api/OrderAPI/[action]")]
 	public class OrderAPIController : Controller
 	{
+		/// <summary>
+		/// The order manager
+		/// </summary>
 		private IOrderManager orderManager;
+
+		/// <summary>
+		/// The response status
+		/// </summary>
 		private ResponseStatusModel responseStatus;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="OrderAPIController"/> class.
+		/// </summary>
+		/// <param name="orderManager">The order manager.</param>
 		public OrderAPIController(IOrderManager orderManager)
 		{
 			this.orderManager = orderManager;
 		}
 
+		/// <summary>
+		/// Gets the specified order.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetOrder(int id)
 		{
@@ -39,6 +59,9 @@ namespace Shop.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Gets the order list.
+		/// </summary>
 		[HttpGet]
 		public async Task<IActionResult> GetOrderList()
 		{

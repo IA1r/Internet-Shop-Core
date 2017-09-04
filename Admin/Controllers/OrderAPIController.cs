@@ -10,17 +10,36 @@ using Admin.ResopnseModel;
 
 namespace Admin.Controllers
 {
+	/// <summary>
+	/// Implemets API controller to manage orders
+	/// </summary>
+	/// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
 	[Produces("application/json")]
 	[Route("api/OrderAPI/[action]")]
 	public class OrderAPIController : Controller
 	{
+		/// <summary>
+		/// The order manager
+		/// </summary>
 		private IOrderManager orderManager;
+
+		/// <summary>
+		/// The response status
+		/// </summary>
 		private ResponseStatusModel responseStatus;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="OrderAPIController"/> class.
+		/// </summary>
+		/// <param name="orderManager">The order manager.</param>
 		public OrderAPIController(IOrderManager orderManager)
 		{
 			this.orderManager = orderManager;
 		}
 
+		/// <summary>
+		/// Gets the order list of all users.
+		/// </summary>
 		[HttpGet]
 		public async Task<IActionResult> GetOrderList()
 		{
@@ -33,6 +52,10 @@ namespace Admin.Controllers
 			return Ok(new { ResponseStatus = this.responseStatus, OrderList = orders });
 		}
 
+		/// <summary>
+		/// Gets the order.
+		/// </summary>
+		/// <param name="orderID">The order identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetOrder(int id)
 		{
@@ -51,6 +74,11 @@ namespace Admin.Controllers
 
 		}
 
+		/// <summary>
+		/// Confirms the specified order.
+		/// </summary>
+		/// <param name="id">The order identifier.</param>
+		/// <returns></returns>
 		[HttpPost("{id}")]
 		public async Task<IActionResult> ConfirmOrder(int id)
 		{
@@ -67,6 +95,11 @@ namespace Admin.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Deletes the specified order.
+		/// </summary>
+		/// <param name="id">The order identifier.</param>
+		/// <returns></returns>
 		[HttpPost("{id}")]
 		public async Task<IActionResult> DeleteOrder(int id)
 		{

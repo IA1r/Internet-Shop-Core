@@ -14,14 +14,30 @@ using Core.GoogleAPI;
 
 namespace Data.Repository
 {
+	/// <summary>
+	/// Implements repository for products.
+	/// </summary>
+	/// <seealso cref="Core.Interface.Repository.IProductRepository" />
 	public class ProductRepository : IProductRepository
 	{
+		/// <summary>
+		/// The unit of work
+		/// </summary>
 		private IUnitOfWork unitOfWork;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ProductRepository"/> class.
+		/// </summary>
+		/// <param name="unitOfWork">The unit of work.</param>
 		public ProductRepository(IUnitOfWork unitOfWork)
 		{
 			this.unitOfWork = unitOfWork;
 		}
 
+		/// <summary>
+		/// Gets the all of products from database.
+		/// </summary>
+		/// <returns>Array of products</returns>
 		public async Task<ProductDto[]> GetProducts()
 		{
 			ProductDto[] products = await this.unitOfWork.Set<Product>()
@@ -44,6 +60,11 @@ namespace Data.Repository
 			return products;
 		}
 
+		/// <summary>
+		/// Gets the products by type.
+		/// </summary>
+		/// <param name="productTypeID">The product type identifier.</param>
+		/// <returns>Array of products</returns>
 		public async Task<ProductDto[]> GetProducts(int productTypeID)
 		{
 			ProductDto[] products = await this.unitOfWork.Set<Product>()
@@ -67,6 +88,11 @@ namespace Data.Repository
 			return products;
 		}
 
+		/// <summary>
+		/// Gets the specified product.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <returns>Product</returns>
 		public async Task<ProductDto> GetProduct(int id)
 		{
 			if (!await this.unitOfWork.Set<Product>().AnyAsync(p => p.ProductID == id))
@@ -91,6 +117,10 @@ namespace Data.Repository
 			return product;
 		}
 
+		/// <summary>
+		/// Gets the all of product types.
+		/// </summary>
+		/// <returns>Array of product types</returns>
 		public async Task<ProductTypeDto[]> GetProductTypes()
 		{
 			ProductTypeDto[] types = await this.unitOfWork.Set<ProductType>()
@@ -103,6 +133,11 @@ namespace Data.Repository
 			return types;
 		}
 
+		/// <summary>
+		/// Initializes the dictionary fields for client side.
+		/// </summary>
+		/// <param name="id">The product type identifier.</param>
+		/// <returns>Empty product for specified type</returns>
 		public async Task<ProductDto> InitDictionaryFields(int id)
 		{
 			ProductDto product = await this.unitOfWork.Set<Product>()
@@ -123,6 +158,11 @@ namespace Data.Repository
 			return product;
 		}
 
+		/// <summary>
+		/// Adds the product to database.
+		/// </summary>
+		/// <param name="productDto">The product dto.</param>
+		/// <returns>The product identifier</returns>
 		public async Task<int> AddProductToDB(ProductDto productDto)
 		{
 			Product product = new Product { ProductTypeID = productDto.ProductTypeID };
@@ -148,6 +188,11 @@ namespace Data.Repository
 			return product.ProductID;
 		}
 
+		/// <summary>
+		/// Updates the product.
+		/// </summary>
+		/// <param name="productDto">The product dto.</param>
+		/// <exception cref="ArgumentException">Product not found</exception>
 		public async Task UpdateProduct(ProductDto productDto)
 		{
 			if (!await this.unitOfWork.Set<Product>().AnyAsync(p => p.ProductID == productDto.ProductID))
@@ -165,6 +210,12 @@ namespace Data.Repository
 			await this.unitOfWork.SaveAsync();
 		}
 
+		/// <summary>
+		/// Updates the product image.
+		/// </summary>
+		/// <param name="productID">The product identifier.</param>
+		/// <param name="file">The image file.</param>
+		/// <returns>The image identifier</returns>
 		public async Task<string> UpdateProductImage(int productID, IFormFile file)
 		{
 			string imageID = null;
@@ -188,6 +239,11 @@ namespace Data.Repository
 			return imageID;
 		}
 
+		/// <summary>
+		/// Searches the products by keyword.
+		/// </summary>
+		/// <param name="keyword">The keyword.</param>
+		/// <returns>Array of products</returns>
 		public async Task<ProductDto[]> SearchProducts(string keyword)
 		{
 			ProductDto[] produtcs = await this.unitOfWork.Set<ProductCharacteristic>()
@@ -208,6 +264,11 @@ namespace Data.Repository
 			return produtcs;
 		}
 
+		/// <summary>
+		/// Finds the product by identifier.
+		/// </summary>
+		/// <param name="productID">The product identifier.</param>
+		/// <returns>Product</returns>
 		public async Task<ProductDto> FindProduct(int productID)
 		{
 			ProductDto produtc = await this.unitOfWork.Set<Product>()

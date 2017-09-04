@@ -15,14 +15,40 @@ using Admin.ResopnseModel;
 
 namespace Admin.Controllers
 {
+	/// <summary>
+	/// Implemets API controller to manage users
+	/// </summary>
+	/// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
 	[Produces("application/json")]
 	[Route("api/AccountAPI/[action]")]
 	public class AccountAPIController : Controller
 	{
+		/// <summary>
+		/// The user manager
+		/// </summary>
 		private readonly UserManager<User> userManager;
+
+		/// <summary>
+		/// The signIn manager
+		/// </summary>
 		private readonly SignInManager<User> signInManager;
+
+		/// <summary>
+		/// The role manager
+		/// </summary>
 		private readonly RoleManager<IdentityRole> roleManager;
+
+		/// <summary>
+		/// The response status
+		/// </summary>
 		private ResponseStatusModel responseStatus;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AccountAPIController"/> class.
+		/// </summary>
+		/// <param name="userManager">The user manager.</param>
+		/// <param name="signInManager">The sign in manager.</param>
+		/// <param name="roleManager">The role manager.</param>
 		public AccountAPIController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
 		{
 			this.userManager = userManager;
@@ -30,6 +56,10 @@ namespace Admin.Controllers
 			this.roleManager = roleManager;
 		}
 
+		/// <summary>
+		/// Registrations the specified user.
+		/// </summary>
+		/// <param name="model">The model.</param>
 		[HttpPost]
 		public async Task<IActionResult> Registration([FromBody]RegistrationRequestModel model)
 		{
@@ -69,6 +99,11 @@ namespace Admin.Controllers
 			return BadRequest(new { ResponseStatus = this.responseStatus });
 		}
 
+		/// <summary>
+		/// Authorization the specified user.
+		/// </summary>
+		/// <param name="model">The model.</param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> SignIn([FromBody]SignInRequestModel model)
 		{
@@ -104,6 +139,10 @@ namespace Admin.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Determines whether user is authenticated.
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet]
 		public IActionResult IsAuthenticated()
 		{
@@ -113,6 +152,10 @@ namespace Admin.Controllers
 				return Ok(new { UserName = "Guest", IsAuthenticated = false });
 		}
 
+		/// <summary>
+		/// Represents an event that is raised when the sign-out operation is complete.
+		/// </summary>
+		/// <returns></returns>
 		[Authorize]
 		[HttpGet]
 		public async Task SignOut()

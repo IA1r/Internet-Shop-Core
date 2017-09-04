@@ -14,19 +14,44 @@ using Shop.ResopnseModel;
 
 namespace Shop.Controllers
 {
+	/// <summary>
+	/// Implemets API controller to manage products
+	/// </summary>
+	/// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
 	[Produces("application/json")]
 	[Route("api/ProductAPI/[action]")]
 	public class ProductAPIController : Controller
 	{
+		/// <summary>
+		/// The product manager
+		/// </summary>
 		private IProductManager productManager;
+
+		/// <summary>
+		/// The cart manager
+		/// </summary>
 		private ICartManager cartManager;
+
+		/// <summary>
+		/// The response status
+		/// </summary>
 		private ResponseStatusModel responseStatus;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ProductAPIController"/> class.
+		/// </summary>
+		/// <param name="productManager">The product manager.</param>
+		/// <param name="cartManager">The cart manager.</param>
 		public ProductAPIController(IProductManager productManager, ICartManager cartManager)
 		{
 			this.productManager = productManager;
 			this.cartManager = cartManager;
 		}
 
+		/// <summary>
+		/// Gets the products.
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet]
 		public async Task<IActionResult> GetProducts()
 		{
@@ -35,6 +60,10 @@ namespace Shop.Controllers
 			return Ok(new { ResponseStatus = this.responseStatus, Products = produtcs });
 		}
 
+		/// <summary>
+		/// Gets the products by specified type.
+		/// </summary>
+		/// <param name="id">The type identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProducts(int id)
 		{
@@ -43,6 +72,10 @@ namespace Shop.Controllers
 			return Ok(new { ResponseStatus = this.responseStatus, Products = produtcs });
 		}
 
+		/// <summary>
+		/// Gets the specified product.
+		/// </summary>
+		/// <param name="id">The product identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProduct(int id)
 		{
@@ -59,6 +92,10 @@ namespace Shop.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Adds the product to shopping cart.
+		/// </summary>
+		/// <param name="id">The product identifier.</param>
 		[HttpPost("{id}")]
 		public async Task<IActionResult> AddProduct(int id)
 		{
@@ -86,6 +123,9 @@ namespace Shop.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Gets the shopping cart.
+		/// </summary>
 		[HttpGet]
 		public async Task<IActionResult> GetShoppingCart()
 		{
@@ -120,6 +160,10 @@ namespace Shop.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Deletes the product from, shopping cart.
+		/// </summary>
+		/// <param name="id">The product identifier.</param>
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteItem(int id)
 		{
@@ -136,6 +180,10 @@ namespace Shop.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Checkouts from shopping cart.
+		/// </summary>
+		/// <param name="request">The request.</param>
 		[HttpPost]
 		public async Task<IActionResult> Checkout([FromBody]CheckoutRequestModel request)
 		{
@@ -164,6 +212,10 @@ namespace Shop.Controllers
 
 		}
 
+		/// <summary>
+		/// Searches the product by keyword.
+		/// </summary>
+		/// <param name="keyword">The keyword.</param>
 		[HttpGet("{keyword}")]
 		public async Task<IActionResult> SearchProduct(string keyword)
 		{

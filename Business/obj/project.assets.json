@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "Google.Apis/1.28.0": {
@@ -3219,6 +3219,12 @@
           "Microsoft.Extensions.Caching.Memory": "1.1.2",
           "Microsoft.NETCore.App": "1.1.2",
           "Newtonsoft.Json": "10.0.3"
+        },
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
         }
       },
       "Data/1.0.0": {
@@ -3229,6 +3235,12 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.2",
           "Microsoft.EntityFrameworkCore.Tools": "1.1.1",
           "Microsoft.NETCore.App": "1.1.2"
+        },
+        "compile": {
+          "bin/placeholder/Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Data.dll": {}
         }
       }
     }
@@ -9126,15 +9138,27 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "D:\\CSharp\\InternetShop\\Business\\Business.csproj",
       "projectName": "Business",
       "projectPath": "D:\\CSharp\\InternetShop\\Business\\Business.csproj",
+      "packagesPath": "C:\\Users\\Air\\.nuget\\packages\\",
       "outputPath": "D:\\CSharp\\InternetShop\\Business\\obj\\",
       "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Air\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {

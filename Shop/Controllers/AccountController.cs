@@ -15,14 +15,40 @@ using Shop.ResopnseModel;
 
 namespace Shop.Controllers
 {
+	/// <summary>
+	/// Implemets API controller to manage users
+	/// </summary>
+	/// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
 	[Produces("application/json")]
 	[Route("api/[controller]/[action]")]
 	public class AccountController : Controller
 	{
+		/// <summary>
+		/// The user manager
+		/// </summary>
 		private readonly UserManager<User> userManager;
+
+		/// <summary>
+		/// The sign in manager
+		/// </summary>
 		private readonly SignInManager<User> signInManager;
+
+		/// <summary>
+		/// The role manager
+		/// </summary>
 		private readonly RoleManager<IdentityRole> roleManager;
+
+		/// <summary>
+		/// The response status
+		/// </summary>
 		private ResponseStatusModel responseStatus;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AccountController"/> class.
+		/// </summary>
+		/// <param name="userManager">The user manager.</param>
+		/// <param name="signInManager">The sign in manager.</param>
+		/// <param name="roleManager">The role manager.</param>
 		public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
 		{
 			this.userManager = userManager;
@@ -30,6 +56,10 @@ namespace Shop.Controllers
 			this.roleManager = roleManager;
 		}
 
+		/// <summary>
+		/// Registrations the specified user.
+		/// </summary>
+		/// <param name="model">The model.</param>
 		[HttpPost]
 		public async Task<IActionResult> Registration([FromBody]RegistrationRequestModel model)
 		{
@@ -69,6 +99,10 @@ namespace Shop.Controllers
 			return BadRequest(new { ResponseStatus = this.responseStatus });
 		}
 
+		/// <summary>
+		/// Authorization the specified user.
+		/// </summary>
+		/// <param name="model">The model.</param>
 		[HttpPost]
 		public async Task<IActionResult> SignIn([FromBody]SignInRequestModel model)
 		{
@@ -100,6 +134,10 @@ namespace Shop.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Determines whether user is authenticated.
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet]
 		public IActionResult IsAuthenticated()
 		{
@@ -109,6 +147,9 @@ namespace Shop.Controllers
 				return Ok(new { UserName = "Guest", IsAuthenticated = false });
 		}
 
+		/// <summary>
+		/// Represents an event that is raised when the sign-out operation is complete.
+		/// </summary>
 		[Authorize]
 		[HttpGet]
 		public async Task SignOut()

@@ -13,18 +13,37 @@ using Admin.ResopnseModel;
 
 namespace Admin.Controllers
 {
+	/// <summary>
+	/// Implemets API controller to manage produtcs
+	/// </summary>
+	/// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
 	[Produces("application/json")]
 	[Route("api/ProductAPI/[action]")]
 	public class ProductAPIController : Controller
 	{
+		/// <summary>
+		/// The product manager
+		/// </summary>
 		private IProductManager productManager;
+
+		/// <summary>
+		/// The response status
+		/// </summary>
 		private ResponseStatusModel responseStatus;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ProductAPIController"/> class.
+		/// </summary>
+		/// <param name="productManager">The product manager.</param>
 		public ProductAPIController(IProductManager productManager)
 		{
 			this.productManager = productManager;
 		}
 
+		/// <summary>
+		/// Gets the all of products from database
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet]
 		public async Task<IActionResult> GetProducts()
 		{
@@ -33,6 +52,10 @@ namespace Admin.Controllers
 			return Ok(new { ResponseStatus = this.responseStatus, Products = produtcs });
 		}
 
+		/// <summary>
+		/// Gets the products by type.
+		/// </summary>
+		/// <param name="productTypeID">The product type identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProducts(int id)
 		{
@@ -41,6 +64,10 @@ namespace Admin.Controllers
 			return Ok(new { ResponseStatus = this.responseStatus, Products = produtcs });
 		}
 
+		/// <summary>
+		/// Gets the specified product.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProduct(int id)
 		{
@@ -57,6 +84,9 @@ namespace Admin.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Gets the product types.
+		/// </summary>
 		[HttpGet]
 		public async Task<IActionResult> GetProductTypes()
 		{
@@ -66,6 +96,10 @@ namespace Admin.Controllers
 
 		}
 
+		/// <summary>
+		/// Initializes the dictionary fields.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> InitDictionaryFields(int id)
 		{
@@ -82,6 +116,10 @@ namespace Admin.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Adds the product to database.
+		/// </summary>
+		/// <param name="request">The request.</param>
 		[HttpPost]
 		public async Task<IActionResult> AddProductToDB([FromBody]ProductRequestModel request)
 		{
@@ -103,6 +141,10 @@ namespace Admin.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Updates the product.
+		/// </summary>
+		/// <param name="request">The request.</param>
 		[HttpPost]
 		public async Task<IActionResult> UpdateProduct([FromBody]ProductRequestModel request)
 		{
@@ -125,6 +167,11 @@ namespace Admin.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Uploads product image.
+		/// </summary>
+		/// <param name="id">The product identifier.</param>
+		/// <param name="file">The file.</param>
 		[HttpPost("{id}")]
 		public async Task<IActionResult> ImageUpload(int id, IFormFile file)
 		{
@@ -141,6 +188,10 @@ namespace Admin.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Finds the product.
+		/// </summary>
+		/// <param name="id">The product identifier.</param>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> FindProduct(int id)
 		{
@@ -155,6 +206,10 @@ namespace Admin.Controllers
 			return Ok(new { ResponseStatus = this.responseStatus });
 		}
 
+		/// <summary>
+		/// Searches the product.
+		/// </summary>
+		/// <param name="keyword">The keyword.</param>
 		[HttpGet("{keyword}")]
 		public async Task<IActionResult> SearchProduct(string keyword)
 		{

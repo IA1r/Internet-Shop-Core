@@ -10,11 +10,27 @@ using System.Threading;
 
 namespace Core.GoogleAPI
 {
+	/// <summary>
+	/// Google Drive API
+	/// </summary>
 	public static class DriveAPI
 	{
+		/// <summary>
+		/// The scopes
+		/// </summary>
 		private static string[] Scopes = { DriveService.Scope.Drive };
+
+		/// <summary>
+		/// The application name
+		/// </summary>
 		private static string ApplicationName = "Upload";
 
+		/// <summary>
+		/// Uploads the file.
+		/// </summary>
+		/// <param name="stream">The stream.</param>
+		/// <param name="fileName">Name of the file.</param>
+		/// <returns></returns>
 		public static string UploadImage(MemoryStream stream, string fileName)
 		{
 			var service = Init();
@@ -22,6 +38,10 @@ namespace Core.GoogleAPI
 			return Upload(stream, service, fileName);
 		}
 
+		/// <summary>
+		/// Initializes drive service.
+		/// </summary>
+		/// <returns>Drive Service</returns>
 		private static DriveService Init()
 		{
 			UserCredential credential;
@@ -37,6 +57,13 @@ namespace Core.GoogleAPI
 			return service;
 		}
 
+		/// <summary>
+		/// Uploads the specified file to google drive.
+		/// </summary>
+		/// <param name="stream">The stream.</param>
+		/// <param name="service">The service.</param>
+		/// <param name="fileName">Name of the file.</param>
+		/// <returns>File identifier</returns>
 		private static string Upload(MemoryStream stream, DriveService service, string fileName)
 		{
 			var fileMetadata = new Google.Apis.Drive.v3.Data.File();
@@ -54,6 +81,10 @@ namespace Core.GoogleAPI
 			return file.Id;
 		}
 
+		/// <summary>
+		/// Gets the credentials.
+		/// </summary>
+		/// <returns>User credentials</returns>
 		private static UserCredential GetCredentials()
 		{
 			UserCredential credential;
@@ -75,6 +106,10 @@ namespace Core.GoogleAPI
 			return credential;
 		}
 
+		/// <summary>
+		/// Deletes the file.
+		/// </summary>
+		/// <param name="fileId">The file identifier.</param>
 		public static void DeleteFile(string fileId)
 		{
 			var service = Init();
